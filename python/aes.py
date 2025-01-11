@@ -1,5 +1,6 @@
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
+import base64
 
 
 def encryptAES(data, key):
@@ -13,7 +14,7 @@ def encryptAES(data, key):
         iv=b'0123456789ABCDEF'
     )
     en_text = aes.encrypt(pad(data, AES.block_size)) #加密明文
-    return en_text.decode()
+    return base64.b64encode(b'KJVIBjDCkbHqnCoZ' + en_text).decode()
 
 def decryptAES(en_text, key):
     key = key.encode('utf-8') if isinstance(key, str) else key
